@@ -1,8 +1,8 @@
 # Setup
-title:        Project or Site name
-tagline:      A responsive theme for your project on GitHub Pages
+title:        Digi Wombat
+tagline:      A technical blog about coding, software engineering, continous integration, system architecture and life.
 baseurl:      ""
-paginate:     1
+paginate:     5
 
 # About/contact
 author:
