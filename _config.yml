@@ -6,8 +6,8 @@ paginate:     1
 
 # About/contact
 author:
-  name:       Author name
-  url:        http://yourhomepage.com 
+  name:       Bob Huang
+  url:        http://blog.angrywombat.net
 
 # Gems
 gems:
