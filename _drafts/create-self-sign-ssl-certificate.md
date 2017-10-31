@@ -1,17 +1,17 @@
 ---
 layout: default
-title:  "How to generate the self-sign certificate using OpenSSL"
+title:  "How to generate self-sign SSL certificate using OpenSSL"
 date:   2017-10-30 17:00:00 +1100
 categories: blog
 ---
 
-# How to generate the self-sign certificate using OpenSSL
+# How to generate self-sign SSL certificate using OpenSSL
 
-There are couple of ways to create your self-sign ssl certificate but most of Google searched results do not provide clear step-by-step manner about how to create the ssl certificate properly, especially for the certificate including CN and SANs/alt-names.
+There are couple of ways to create your self-sign ssl certificate but most of Google searched results do not provide clear step-by-step manner about how to create the ssl certificate properly, especially for the certificate including CN and SANs/alt-names. Subject Alternative Names(SANs) are a X509 Version 3 (RFC 2459) extension to allow an SSL certificate to specify multiple names that the certificate should match. 
 
 ## Solution 1: 
 
-#### Check the OpenSSL installed properly
+#### Check OpenSSL installed properly
 In my case:
 ```
 # openssl version
@@ -75,9 +75,9 @@ Here, the new "example-cert.csr" includes all CN and SANs will be signed by a pu
 
 #### Self-sign the new CSR with sha256 algorithm
 ```
-openssl x509 -req -sha256 -days 3650 -in example-cert.csr -signkey example-private-key.pem -out example-cert.crt -extensions v3_req -extfile example-cert.conf
+# openssl x509 -req -sha256 -days 3650 -in example-cert.csr -signkey example-private-key.pem -out example-cert.crt -extensions v3_req -extfile example-cert.conf
 ```
-Subject Alternative Names are a X509 Version 3 (RFC 2459) extension to allow an SSL certificate to specify multiple names that the certificate should match. We also give 10 years as expired date for the new self-signed certificate. 
+We also give 10 years as expired date for the new self-signed certificate. 
 
 Then, you can check the new certificate file as: 
 ```
@@ -90,10 +90,10 @@ X509v3 Subject Alternative Name:
 
 
 ## Solution 2:
-So far, you have your certificate sign request which you can provide to CA or you could self-sign it. Another solution which will generate the private key and self-signed CRT(certificate) file in one command. No intermediate CSR will be created.
+So far, you have your certificate sign request which you can provide to CA or you can self-sign it. Another solution which will generate the private key and self-signed CRT(certificate) file in one command. No intermediate CSR will be created.
 
 #### Prepare the .conf file
-For including SANs into a certificate, you need to create a .conf file including all configurations such as CN (Common Name) and SANs. For example:
+Create a .conf file including all configurations such as CN (Common Name) and SANs.
 ```
 # vim example-cert.conf
 
@@ -143,11 +143,10 @@ You can check your new csr as above, it should shows right CN, SANs and sha256 a
 
 
 ## Notes:
-You can verify your CSR, CRT or live site SSL at https://www.sslshopper.com and in browser.
+You can verify your CSR, CRT or live site SSL at https://www.sslshopper.com  in browser.
 
 
 ## Reference:
 - https://geekflare.com/san-ssl-certificate/
 - http://apetec.com/support/generatesan-csr.htm
 - https://geekflare.com/joomla-security-vulnerability-scanner/
-
