@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  "The Readme file of GeoPattern"
+title:  "Example: The Readme file of GeoPattern"
 date:   2017-10-30 16:00:00 +1100
 categories: blog
 ---

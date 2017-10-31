@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  "Welcome to Jekyll!"
+title:  "Example: Welcome to Jekyll!"
 date:   2017-10-12 12:11:15 +1100
 categories: blog
 ---
