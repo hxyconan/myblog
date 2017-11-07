@@ -142,8 +142,17 @@ You can check your new csr as above, it should shows right CN, SANs and sha256 a
 ```
 
 
-## Notes:
+## Verify your certificate via GUI tool:
 You can verify your CSR, CRT or live site SSL at https://www.sslshopper.com  in browser.
+
+## Verify your live site certificate via OpenSSL command line tool
+```
+# openssl s_client -connect 23.46.42.28:443 -servername www.paypal.com | openssl x509 -fingerprint -text
+```
+or without Host IP 
+```
+# openssl s_client -connect www.paypal.com:443 | openssl x509 -fingerprint -text
+```
 
 
 ## Reference:
