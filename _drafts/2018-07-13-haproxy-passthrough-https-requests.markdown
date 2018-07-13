@@ -5,22 +5,24 @@ date:   2018-07-13 12:30:00 +1100
 categories: blog
 ---
 
-A typical web services network typology is that you hosting multiple backend services after a load balancer. Install proper SSL certificate on service will allow you to establish trust channel between your server to client. There is two places you can install SSL certificate:
+# HAProxy configuration for pass through HTTPS request to corresponding backend
 
-## Install SSL certificate on load balancer level
+Last time, we present [how to generate self-sign SSL certificate using OpenSSL](/blog/2017/10/30/create-self-sign-ssl-certificate.html). A typical web services network typology is that you hosting multiple backend services after a load balancer. Install proper SSL certificate on service will allow you to establish trust channel between server to your client. There is two places you can install SSL certificate:
+
+## 1. Install SSL certificate on load balancer level
 Here, HAProxy will decrypted HTTPS requests, SSL cert must be installed in Load Balancer level and responsible for encrypting and decrypting all traffics. All out-going requests from Load Balance to backends will be unencrypted HTTP.
 ```
 client <--> HTTPS <--> HAProxy <--> HTTP <--> backend server
 ```
 Those backend servers usually in private subnet which will be safe to use HTTP with no encryption.
 
-However, with such manner, you have to including all certificates in your LB  which make it hard to upgrade and maintain when you have multiply servers at backend and keep adding new ones. Restart LB always tricky since it might outage all connected backend services.
+However, with such manner, you have to including all certificates in your LB  which make it hard to maintain when you have multiply servers at backend and keep adding new ones. Restart LB always tricky since it might outage all connected backend services. Ref to: 
 
-## Install SSL certificate on backend level and HAProxy transparently pass through all HTTPS request
-When HAProxy passing though HTTPS traffic it simply sends the raw TCP stream through to the backend which has SSL certificate and handles encryption and decryption. The tricky thing is, since the HAProxy doesn’t have a certificate because it’s not going to decrypt the traffic and that means it’s never going to see the Host header. Instead it needs to be told to wait for the SSL hello so it can sniff the SNI request (which including a request domain) during the handshaking stage, then decides which backend server it routing to. 
+
+## 2. Install SSL certificate on backend level and HAProxy transparently pass through all HTTPS request
+When HAProxy passing though HTTPS traffic it simply sends the raw TCP stream through to the backend which has SSL certificate and handles encryption and decryption. The tricky thing is, since the HAProxy doesn’t have a certificate then it’s not going to decrypt the traffic, means it’s never going to see the Host header. Instead it needs to be told to wait for the SSL hello so it can sniff the SNI request (which including a request domain) during the handshaking stage, then decides which backend server it routing to. 
 
 Following is the codes to routing HTTPS request based on SNI in request. No decryption step in LB level:
-
 ```
 #---------------------------------------------------------------------
 # Proxys to the webserver backend port 443
@@ -83,6 +85,7 @@ DNS.1   = *.aaa.domain.com
 ```
 
 For supporting wildcard SNI, the ACL rule in haproxy.cfg should be exactly like:
+
 ```
 use_backend aaa_ssl if { req_ssl_sni -m end .aaa.domain.com }
 ```
