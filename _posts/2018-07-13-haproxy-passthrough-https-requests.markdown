@@ -63,15 +63,15 @@ x509_extensions     = v3_req
 
 [ req_distinguished_name ]
 countryName           = Country Name (2 letter code)
-countryName_default   = {{ countryName_default }}
+countryName_default   = { countryName_default }
 stateOrProvinceName   = State or Province Name (full name)
-stateOrProvinceName_default = {{ stateOrProvinceName_default }}
+stateOrProvinceName_default = { stateOrProvinceName_default }
 localityName          = Locality Name (eg, city)
-localityName_default  = {{ localityName_default }}
+localityName_default  = { localityName_default }
 organizationName          = Organization Name (eg, company)
-organizationName_default  = {{ organizationName_default }}
+organizationName_default  = { organizationName_default }
 commonName            = Common Name (eg, YOUR name)
-commonName_default    = {{ commonName_default }}
+commonName_default    = { commonName_default }
 commonName_max        = 64
 
 [ v3_req ]
@@ -81,7 +81,6 @@ subjectAltName          = @alt_names
 
 [alt_names]
 DNS.1   = *.aaa.domain.com
-
 ```
 
 For supporting wildcard SNI, the ACL rule in haproxy.cfg should be exactly like:
