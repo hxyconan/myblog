@@ -18,7 +18,7 @@ SSL-VPN setup VPN on TCP/UDP 443. This will gives such VPN service better firewa
 - etc.
 
 ## Installation
-- For quick installation, I write a Ansible role to do some initialization works, it will install SoftEther (ver: v4.28-9669-beta-2018.09.11) in a Ubuntu 16.04 LTS server and add a systemctl service with auto start enabled.
+- For quick installation, I write a [Ansible role](https://github.com/hxyconan/ansible-role-sslvpn) to do some initialization works, it will install SoftEther (ver: v4.28-9669-beta-2018.09.11) in a Ubuntu 16.04 LTS server and add a systemctl service with auto start enabled.
 - You could run ansible playbook to install and config your server.
 - Alternatively, refer to [Setting up SoftEther VPN Server on Ubuntu 16.04 Xenial Xerus Linux](https://linuxconfig.org/setting-up-softether-vpn-server-on-ubuntu-16-04-xenial-xerus-linux) for each step details. In brief, it downloads SoftEther server source, make install, configure as a systemd daemon, start it.
 
@@ -168,13 +168,15 @@ Unzip it you will find `x_openvpn_remote_access_l3.ovpn` file. Review this ovpn 
 
 
 ### References
-- [https://linuxconfig.org/setting-up-softether-vpn-server-on-ubuntu-16-04-xenial-xerus-linux](https://linuxconfig.org/setting-up-softether-vpn-server-on-ubuntu-16-04-xenial-xerus-linux)
-- [https://www.digitalocean.com/community/tutorials/how-to-setup-a-multi-protocol-vpn-server-using-softether](https://www.digitalocean.com/community/tutorials/how-to-setup-a-multi-protocol-vpn-server-using-softether)
-- About SecureNAT: [https://www.softether.org/index.php?title=4-docs/1-manual/3._SoftEther_VPN_Server_Manual/3.7_Virtual_NAT_%26_Virtual_DHCP_Servers](https://www.softether.org/index.php?title=4-docs/1-manual/3._SoftEther_VPN_Server_Manual/3.7_Virtual_NAT_%26_Virtual_DHCP_Servers)
-- VPN Server Manager: [https://www.softether.org/4-docs/1-manual/2._SoftEther_VPN_Essential_Architecture/2.4_VPN_Server_Manager](https://www.softether.org/4-docs/1-manual/2._SoftEther_VPN_Essential_Architecture/2.4_VPN_Server_Manager)
-- Replacements of OpenVPN: [https://www.softether.org/4-docs/2-howto/7.Replacements_of_Legacy_VPNs/2.Replacements_of_OpenVPN](https://www.softether.org/4-docs/2-howto/7.Replacements_of_Legacy_VPNs/2.Replacements_of_OpenVPN)
-- [https://www.softether.org/4-docs/1-manual/6._Command_Line_Management_Utility_Manual/6.3_VPN_Server_%2F%2F_VPN_Bridge_Management_Command_Reference_(For_Entire_Server)#6.3.75_.22OpenVpnGet.22:_Get_the_Current_Settings_of_OpenVPN_Clone_Server_Function](https://www.softether.org/4-docs/1-manual/6._Command_Line_Management_Utility_Manual/6.3_VPN_Server_%2F%2F_VPN_Bridge_Management_Command_Reference_(For_Entire_Server)#6.3.75_.22OpenVpnGet.22:_Get_the_Current_Settings_of_OpenVPN_Clone_Server_Function)
-- [https://github.com/SoftEtherVPN/SoftEtherVPN_Stable](https://github.com/SoftEtherVPN/SoftEtherVPN_Stable)
+- Ansible role to setup an SSL-VPN server using SoftEther
+[https://github.com/hxyconan/ansible-role-sslvpn](https://github.com/hxyconan/ansible-role-sslvpn)
+- https://linuxconfig.org/setting-up-softether-vpn-server-on-ubuntu-16-04-xenial-xerus-linux
+- https://www.digitalocean.com/community/tutorials/how-to-setup-a-multi-protocol-vpn-server-using-softether
+- About SecureNAT: https://www.softether.org/index.php?title=4-docs/1-manual/3._SoftEther_VPN_Server_Manual/3.7_Virtual_NAT_%26_Virtual_DHCP_Servers
+- VPN Server Manager: https://www.softether.org/4-docs/1-manual/2._SoftEther_VPN_Essential_Architecture/2.4_VPN_Server_Manager
+- Replacements of OpenVPN: https://www.softether.org/4-docs/2-howto/7.Replacements_of_Legacy_VPNs/2.Replacements_of_OpenVPN
+- https://www.softether.org/4-docs/1-manual/6._Command_Line_Management_Utility_Manual/6.3_VPN_Server_%2F%2F_VPN_Bridge_Management_Command_Reference_(For_Entire_Server)#6.3.75_.22OpenVpnGet.22:_Get_the_Current_Settings_of_OpenVPN_Clone_Server_Function
+- https://github.com/SoftEtherVPN/SoftEtherVPN_Stable
 
 
 
